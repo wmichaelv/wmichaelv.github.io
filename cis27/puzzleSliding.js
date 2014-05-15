@@ -24,6 +24,9 @@ window.addEventListener('load',function(e) {
       [0,0,0,0,0]
     ];
 
+  /* moveCount() flag */
+  var countFlag = 0;
+
   /* Movement Count */
   var moveCount = 0;
 
@@ -51,7 +54,7 @@ window.addEventListener('load',function(e) {
       this.on("drag");
     },
     drag: function(touch) {
-      moveCheck();
+      countFlag = 1;
       if (waiting())
         if (touch.dx < -20) {
           goTo("left", this, 0, 0);
@@ -82,7 +85,7 @@ window.addEventListener('load',function(e) {
             goTo("right", this, 0, 0);
           }
         }
-      /*
+      /* Quick win
       if (this.p.x == 200 * scSize && this.p.y == 500 * scSize) {
         Q.stageScene("endGame",1, { label: "Congratulation!"});
       }
@@ -99,7 +102,7 @@ window.addEventListener('load',function(e) {
       this.on("drag");
     },
     drag: function(touch) {
-      moveCheck();
+      countFlag = 1;
       if (waiting())
         if (touch.dx < -20) {
           goTo("left", this, 50, 50);
@@ -144,7 +147,7 @@ window.addEventListener('load',function(e) {
       this.on("drag");
     },
     drag: function(touch) {
-      moveCheck();
+      countFlag = 1;
       if (waiting())
         if (touch.dx < -20) {
           goTo("left", this, 50, 0);
@@ -186,7 +189,7 @@ window.addEventListener('load',function(e) {
       this.on("drag");
     },
     drag: function(touch) {
-      moveCheck();
+      countFlag = 1;
       if (waiting())
         if (touch.dx < -20) {
           goTo("left", this, 0, 50);
@@ -219,6 +222,10 @@ window.addEventListener('load',function(e) {
         }
     }
   });
+
+  Q.onmouseup = function() {
+    if (countFlag == 1) moveCheck();
+  };
 
   function fixPos(coord, disposition) {
     if (disposition == null) disposition = 0;
@@ -391,6 +398,7 @@ window.addEventListener('load',function(e) {
     if (!compareMatrix4by5(coord, tempCoord)) {
       duplicateMatrix4by5(coord, tempCoord);
       moveCount++;
+      countFlag = 0;
       console.log("moveCount = ", moveCount);
     }
     return;
