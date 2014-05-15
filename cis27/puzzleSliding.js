@@ -223,7 +223,7 @@ window.addEventListener('load',function(e) {
     }
   });
 
-  Q.onmouseup = function() {
+  Q.mouseup = function() {
     if (countFlag == 1) moveCheck();
   };
 
