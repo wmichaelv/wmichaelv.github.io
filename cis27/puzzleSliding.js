@@ -229,7 +229,7 @@ window.addEventListener('load',function(e) {
               coord[fixPos(object.p.x, wOffset)][fixPos(object.p.y, hOffset)] = 0;
               coord[fixPos(object.p.x, wOffset)][fixPos(object.p.y, -hOffset)] = 0;
               object.p.x -= 100 * scSize;
-              wait = 100;
+              wait = 10;
             }
           }
         } else {
@@ -239,7 +239,7 @@ window.addEventListener('load',function(e) {
             coord[nextX][nextY] = 1;
             coord[fixPos(object.p.x, wOffset)][fixPos(object.p.y)] = 0;
             object.p.x -= 100 * scSize;
-            wait = 100;
+            wait = 10;
           }
         }
         break;
@@ -256,7 +256,7 @@ window.addEventListener('load',function(e) {
               coord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y, hOffset)] = 0;
               coord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y, -hOffset)] = 0;
               object.p.x += 100 * scSize;
-              wait = 100;
+              wait = 10;
             }
           }
         } else {
@@ -266,7 +266,7 @@ window.addEventListener('load',function(e) {
             coord[nextX][nextY] = 1;
             coord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y)] = 0;
             object.p.x += 100 * scSize;
-            wait = 100;
+            wait = 10;
           }
         }
         break;
@@ -283,7 +283,7 @@ window.addEventListener('load',function(e) {
               coord[fixPos(object.p.x, wOffset)][fixPos(object.p.y, hOffset)] = 0;
               coord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y, hOffset)] = 0;
               object.p.y -= 100 * scSize;
-              wait = 100;
+              wait = 10;
             }
           }
         } else {
@@ -293,7 +293,7 @@ window.addEventListener('load',function(e) {
             coord[nextX][nextY] = 1;
             coord[fixPos(object.p.x)][fixPos(object.p.y, hOffset)] = 0;
             object.p.y -= 100 * scSize;
-            wait = 100;
+            wait = 10;
           }
         }
         break;
@@ -310,7 +310,7 @@ window.addEventListener('load',function(e) {
               coord[fixPos(object.p.x, wOffset)][fixPos(object.p.y, -hOffset)] = 0;
               coord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y, -hOffset)] = 0;
               object.p.y += 100 * scSize;
-              wait = 100;
+              wait = 10;
             }
           }
         } else {
@@ -320,7 +320,7 @@ window.addEventListener('load',function(e) {
             coord[nextX][nextY] = 1;
             coord[fixPos(object.p.x)][fixPos(object.p.y, -hOffset)] = 0;
             object.p.y += 100 * scSize;
-            wait = 100;
+            wait = 10;
           }
         }
         break;
