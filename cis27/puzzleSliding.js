@@ -15,6 +15,18 @@ window.addEventListener('load',function(e) {
       [0,0,0,0,0]
     ];
 
+  /* Temporary Coordinate */
+  var tempCoord = 
+    [
+      [0,0,0,0,0],
+      [0,0,0,0,0],
+      [0,0,0,0,0],
+      [0,0,0,0,0]
+    ];
+
+  /* Movement Count */
+  var moveCount = 0;
+
   /* Coordinate Variables */
   var nextX = 0;
   var nextY = 0;
@@ -39,6 +51,7 @@ window.addEventListener('load',function(e) {
       this.on("drag");
     },
     drag: function(touch) {
+      moveCheck();
       if (waiting())
         if (touch.dx < -20) {
           goTo("left", this, 0, 0);
@@ -86,6 +99,7 @@ window.addEventListener('load',function(e) {
       this.on("drag");
     },
     drag: function(touch) {
+      moveCheck();
       if (waiting())
         if (touch.dx < -20) {
           goTo("left", this, 50, 50);
@@ -130,6 +144,7 @@ window.addEventListener('load',function(e) {
       this.on("drag");
     },
     drag: function(touch) {
+      moveCheck();
       if (waiting())
         if (touch.dx < -20) {
           goTo("left", this, 50, 0);
@@ -171,6 +186,7 @@ window.addEventListener('load',function(e) {
       this.on("drag");
     },
     drag: function(touch) {
+      moveCheck();
       if (waiting())
         if (touch.dx < -20) {
           goTo("left", this, 0, 50);
@@ -343,7 +359,42 @@ window.addEventListener('load',function(e) {
     }
   }
 
+  /* Wait Counter for the next movement */
   function waiting() { return (wait > 0) ? !wait-- : true; }
+
+  /* Refresh Coordinate to 0 */
+  function resetMatrix4by5(matrix) {
+    for (var i = 0; i < 4; i++)
+        for (var j = 0; j < 5; j++)
+          matrix[i][j] = 0;
+    return;
+  }
+
+  /* Compare two matrix */
+  function compareMatrix4by5(matrix1, matrix2) {
+    for (var i = 0; i < 4; i++)
+      for (var j = 0; j < 5; j++)
+        if (matrix1[i][j] != matrix2[i][j]) return false;
+    return true;
+  }
+
+  /* store matrix1 value into matrix2 */
+  function duplicateMatrix4by5(matrix1, matrix2) {
+    for (var i = 0; i < 4; i++)
+      for (var j = 0; j < 5; j++)
+        matrix2[i][j] = matrix1[i][j];
+    return;
+  }
+
+  /* if the board changes, increment move count by 1 */
+  function moveCheck() {
+    if (!compareMatrix4by5(coord, tempCoord)) {
+      duplicateMatrix4by5(coord, tempCoord);
+      moveCount++;
+      console.log("moveCount = ", moveCount);
+    }
+    return;
+  }
 
 
   /* Executed Commands */
@@ -352,9 +403,11 @@ window.addEventListener('load',function(e) {
     console.log("Begin");
 
     /* Refresh Coordinate to 0 */
-    for (var i = 0; i < 4; i++)
-        for (var j = 0; j < 5; j++)
-          coord[i][j] = 0;
+    resetMatrix4by5(coord);
+    resetMatrix4by5(tempCoord);
+
+    /* Refresh movement counter to 0 */
+    moveCount = 0;
 
     console.log("Pre-Object Implementation");
     console.log(coord);
