@@ -101,6 +101,7 @@ window.addEventListener('load',function(e) {
       coord[fixPos(p.x, -50)][fixPos(p.y, 50)] = 1;
       coord[fixPos(p.x, -50)][fixPos(p.y, -50)] = 1;
       this.on("drag");
+      this.on("touchEnd");
     },
     drag: function(touch) {
       if (waiting())
@@ -136,6 +137,9 @@ window.addEventListener('load',function(e) {
       if (this.p.x == 250 * scSize && this.p.y == 350 * scSize) {
         Q.stageScene("endGame",1, { label: "Congratulation!"});
       }
+    },
+    touchEnd: function(touch) {
+      moveCheck();
     }
   });
 
@@ -145,6 +149,7 @@ window.addEventListener('load',function(e) {
       coord[fixPos(p.x, 50)][fixPos(p.y)] = 1;
       coord[fixPos(p.x, -50)][fixPos(p.y)] = 1;
       this.on("drag");
+      this.on("touchEnd");
     },
     drag: function(touch) {
       if (waiting())
@@ -177,6 +182,9 @@ window.addEventListener('load',function(e) {
             goTo("right", this, 50, 0);
           }
         }
+    },
+    touchEnd: function(touch) {
+      moveCheck();
     }
   });
 
@@ -186,6 +194,7 @@ window.addEventListener('load',function(e) {
       coord[fixPos(p.x)][fixPos(p.y, 50)] = 1;
       coord[fixPos(p.x)][fixPos(p.y, -50)] = 1;
       this.on("drag");
+      this.on("touchEnd");
     },
     drag: function(touch) {
       if (waiting())
@@ -218,6 +227,9 @@ window.addEventListener('load',function(e) {
             goTo("right", this, 0, 50);
           }
         }
+    },
+    touchEnd: function(touch) {
+      moveCheck();
     }
   });
 
@@ -429,6 +441,11 @@ window.addEventListener('load',function(e) {
     var vb2 = stage.insert(new Q.VB({ x: 100 * scSize, y: 350 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
     var vb3 = stage.insert(new Q.VB({ x: 400 * scSize, y: 150 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
     var vb4 = stage.insert(new Q.VB({ x: 400 * scSize, y: 350 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+
+    var moveCountBox = stage.insert(new Q.UI.Container({
+      x: 500 * scSize, y: 200 * scSize, fill: "rgba(0,0,0,0.5)" }));
+    var label = box.insert(new Q.UI.Text({x:10, y: 10, label: moveCount }));
+    moveCountBox.fit(20);
 
     console.log("Post-Object Implementation");
     console.log(coord);
