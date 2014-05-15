@@ -83,11 +83,14 @@ window.addEventListener('load',function(e) {
             goTo("right", this, 0, 0);
           }
         }
-      /* Quick win
-      if (this.p.x == 200 * scSize && this.p.y == 500 * scSize) {
+
+      /*
+      //Quick win
+      if (this.p.x == 300 * scSize && this.p.y == 500 * scSize) {
         Q.stageScene("endGame",1, { label: "Congratulation!"});
       }
       */
+      
     },
     touchEnd: function(touch) {
       moveCheck();
@@ -404,7 +407,8 @@ window.addEventListener('load',function(e) {
     if (!compareMatrix4by5(coord, tempCoord)) {
       duplicateMatrix4by5(coord, tempCoord);
       moveCount++;
-      console.log("moveCount = ", moveCount);
+      var contain = Q("UI.Text").first();
+      contain.p.label = "Moves: " + moveCount.toString();
     }
     return;
   }
@@ -442,10 +446,24 @@ window.addEventListener('load',function(e) {
     var vb3 = stage.insert(new Q.VB({ x: 400 * scSize, y: 150 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
     var vb4 = stage.insert(new Q.VB({ x: 400 * scSize, y: 350 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
 
+    /* Duplicate Temp After Object Initialization */
+    duplicateMatrix4by5(coord, tempCoord);
+
     var moveCountBox = stage.insert(new Q.UI.Container({
-      x: 500 * scSize, y: 200 * scSize, fill: "rgba(0,0,0,0.5)" }));
-    var label = box.insert(new Q.UI.Text({x:10, y: 10, label: moveCount }));
-    moveCountBox.fit(20);
+      fill: "gray",
+      border: 5,
+      shadow: 10,
+      shadowColor: "rgba(0,0,0,0.5)",
+      y: 325,
+      x: Q.width/3
+    }));
+    stage.insert(new Q.UI.Text({ 
+      label: "Moves: " + moveCount.toString(),
+      color: "white",
+      x: 0,
+      y: 0
+    }),moveCountBox);
+    moveCountBox.fit(20,20);
 
     console.log("Post-Object Implementation");
     console.log(coord);
