@@ -15,7 +15,16 @@ window.addEventListener('load',function(e) {
       [0,0,0,0,0]
     ];
 
-  /* Temporary Coordinate */
+  /* Previous Coordinate */
+  var prevCoord = 
+    [
+      [0,0,0,0,0],
+      [0,0,0,0,0],
+      [0,0,0,0,0],
+      [0,0,0,0,0]
+    ];
+
+  /* Temp Coordinate For Undo Purpose */ 
   var tempCoord = 
     [
       [0,0,0,0,0],
@@ -404,8 +413,8 @@ window.addEventListener('load',function(e) {
 
   /* if the board changes, increment move count by 1 */
   function moveCheck() {
-    if (!compareMatrix4by5(coord, tempCoord)) {
-      duplicateMatrix4by5(coord, tempCoord);
+    if (!compareMatrix4by5(coord, prevCoord)) {
+      duplicateMatrix4by5(coord, prevCoord);
       moveCount++;
       var contain = Q("UI.Text").first();
       contain.p.label = "Moves: " + moveCount.toString();
@@ -421,7 +430,7 @@ window.addEventListener('load',function(e) {
 
     /* Refresh Coordinate to 0 */
     resetMatrix4by5(coord);
-    resetMatrix4by5(tempCoord);
+    resetMatrix4by5(prevCoord);
 
     /* Refresh movement counter to 0 */
     moveCount = 0;
@@ -446,14 +455,30 @@ window.addEventListener('load',function(e) {
     var vb3 = stage.insert(new Q.VB({ x: 400 * scSize, y: 150 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
     var vb4 = stage.insert(new Q.VB({ x: 400 * scSize, y: 350 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
 
-    /* Duplicate Temp After Object Initialization */
-    duplicateMatrix4by5(coord, tempCoord);
+    /* Duplicate Matrix After Object Initialization */
+    duplicateMatrix4by5(coord, prevCoord);
 
+    /* Reset Box */
+    var resetBox = stage.insert(new Q.UI.Container({
+      fill: "gray",
+      border: 5,
+      y: 225,
+      x: Q.width/3
+    }));
+    
+    /* Reset Button */
+    var resetButton = resetBox.insert(new Q.UI.Button({ 
+      label: " Reset  ", fontColor: "white", x: 0, y: 0, font: "800 24px Arial" }))
+    resetButton.on("click",function() {
+      Q.clearStages();
+      Q.stageScene('startGame');
+    });
+    resetBox.fit(20);
+
+    /* Move Count Box */
     var moveCountBox = stage.insert(new Q.UI.Container({
       fill: "gray",
       border: 5,
-      shadow: 10,
-      shadowColor: "rgba(0,0,0,0.5)",
       y: 325,
       x: Q.width/3
     }));
