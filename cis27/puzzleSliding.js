@@ -7,30 +7,30 @@ window.addEventListener('load',function(e) {
    * Collision Coordinate *
    *      4 by 5          *
    ************************/
-  var coord =
+  var currCoord =
     [
-      [0,0,0,0,0],
-      [0,0,0,0,0],
-      [0,0,0,0,0],
-      [0,0,0,0,0]
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"]
     ];
 
   /* Previous Coordinate */
   var prevCoord = 
     [
-      [0,0,0,0,0],
-      [0,0,0,0,0],
-      [0,0,0,0,0],
-      [0,0,0,0,0]
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"]
     ];
 
   /* Temp Coordinate For Undo Purpose */ 
   var tempCoord = 
     [
-      [0,0,0,0,0],
-      [0,0,0,0,0],
-      [0,0,0,0,0],
-      [0,0,0,0,0]
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"]
     ];
 
   /* Movement Count */
@@ -56,7 +56,7 @@ window.addEventListener('load',function(e) {
   Q.Sprite.extend("SS",{
     init: function(p) {
       this._super(p, { asset: "smallSquare.png" });
-      coord[fixPos(p.x)][fixPos(p.y)] = 1;
+      currCoord[fixPos(p.x)][fixPos(p.y)] = String(this.p.name);
       this.on("drag");
       this.on("touchEnd");
 
@@ -108,10 +108,10 @@ window.addEventListener('load',function(e) {
   Q.Sprite.extend("LS",{
     init: function(p) {
       this._super(p, { asset: "largeSquare.png" });
-      coord[fixPos(p.x, 50)][fixPos(p.y, 50)] = 1;
-      coord[fixPos(p.x, 50)][fixPos(p.y, -50)] = 1;
-      coord[fixPos(p.x, -50)][fixPos(p.y, 50)] = 1;
-      coord[fixPos(p.x, -50)][fixPos(p.y, -50)] = 1;
+      currCoord[fixPos(p.x, 50)][fixPos(p.y, 50)] = String(this.p.name);
+      currCoord[fixPos(p.x, 50)][fixPos(p.y, -50)] = String(this.p.name);
+      currCoord[fixPos(p.x, -50)][fixPos(p.y, 50)] = String(this.p.name);
+      currCoord[fixPos(p.x, -50)][fixPos(p.y, -50)] = String(this.p.name);
       this.on("drag");
       this.on("touchEnd");
     },
@@ -158,8 +158,8 @@ window.addEventListener('load',function(e) {
   Q.Sprite.extend("HB",{
     init: function(p) {
       this._super(p, { asset: "horzBar.png" });
-      coord[fixPos(p.x, 50)][fixPos(p.y)] = 1;
-      coord[fixPos(p.x, -50)][fixPos(p.y)] = 1;
+      currCoord[fixPos(p.x, 50)][fixPos(p.y)] = String(this.p.name);
+      currCoord[fixPos(p.x, -50)][fixPos(p.y)] = String(this.p.name);
       this.on("drag");
       this.on("touchEnd");
     },
@@ -203,8 +203,8 @@ window.addEventListener('load',function(e) {
   Q.Sprite.extend("VB",{
     init: function(p) {
       this._super(p, { asset: "vertBar.png" });
-      coord[fixPos(p.x)][fixPos(p.y, 50)] = 1;
-      coord[fixPos(p.x)][fixPos(p.y, -50)] = 1;
+      currCoord[fixPos(p.x)][fixPos(p.y, 50)] = String(this.p.name);
+      currCoord[fixPos(p.x)][fixPos(p.y, -50)] = String(this.p.name);
       this.on("drag");
       this.on("touchEnd");
     },
@@ -255,7 +255,7 @@ window.addEventListener('load',function(e) {
     /**************************************************
      * offset is based on extra length from 100 x 100 *
      **************************************************/
-    
+
     switch (direction) {
       case "left":
         if (hOffset != 0) {
@@ -264,23 +264,23 @@ window.addEventListener('load',function(e) {
           if (checkFutureCollision(nextX, nextY)) {
             nextY = fixPos(object.p.y, -hOffset);
             if (checkFutureCollision(nextX, nextY)) {
-              coord[nextX][nextY] = 1;
+              currCoord[nextX][nextY] = String(object.p.name);
               nextY = fixPos(object.p.y, hOffset);
-              coord[nextX][nextY] = 1;
-              coord[fixPos(object.p.x, wOffset)][fixPos(object.p.y, hOffset)] = 0;
-              coord[fixPos(object.p.x, wOffset)][fixPos(object.p.y, -hOffset)] = 0;
+              currCoord[nextX][nextY] = String(object.p.name);
+              currCoord[fixPos(object.p.x, wOffset)][fixPos(object.p.y, hOffset)] = "0";
+              currCoord[fixPos(object.p.x, wOffset)][fixPos(object.p.y, -hOffset)] = "0";
               object.p.x -= 100 * scSize;
-              wait = 10;
+              wait = 40;
             }
           }
         } else {
           nextX = fixPos(object.p.x, -(100 + wOffset));
           nextY = fixPos(object.p.y);
           if (checkFutureCollision(nextX, nextY)) {
-            coord[nextX][nextY] = 1;
-            coord[fixPos(object.p.x, wOffset)][fixPos(object.p.y)] = 0;
+            currCoord[nextX][nextY] = String(object.p.name);
+            currCoord[fixPos(object.p.x, wOffset)][fixPos(object.p.y)] = "0";
             object.p.x -= 100 * scSize;
-            wait = 10;
+            wait = 40;
           }
         }
         break;
@@ -291,23 +291,23 @@ window.addEventListener('load',function(e) {
           if (checkFutureCollision(nextX, nextY)) {
             nextY = fixPos(object.p.y, -hOffset);
             if (checkFutureCollision(nextX, nextY)) {
-              coord[nextX][nextY] = 1;
+              currCoord[nextX][nextY] = String(object.p.name);
               nextY = fixPos(object.p.y, hOffset);
-              coord[nextX][nextY] = 1;
-              coord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y, hOffset)] = 0;
-              coord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y, -hOffset)] = 0;
+              currCoord[nextX][nextY] = String(object.p.name);
+              currCoord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y, hOffset)] = "0";
+              currCoord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y, -hOffset)] = "0";
               object.p.x += 100 * scSize;
-              wait = 10;
+              wait = 40;
             }
           }
         } else {
           nextX = fixPos(object.p.x, (100 + wOffset));
           nextY = fixPos(object.p.y);
           if (checkFutureCollision(nextX, nextY)) {
-            coord[nextX][nextY] = 1;
-            coord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y)] = 0;
+            currCoord[nextX][nextY] = String(object.p.name);
+            currCoord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y)] = "0";
             object.p.x += 100 * scSize;
-            wait = 10;
+            wait = 40;
           }
         }
         break;
@@ -318,23 +318,23 @@ window.addEventListener('load',function(e) {
           if (checkFutureCollision(nextX, nextY)) {
             nextX = fixPos(object.p.x, -wOffset);
             if (checkFutureCollision(nextX, nextY)) {
-              coord[nextX][nextY] = 1;
+              currCoord[nextX][nextY] = String(object.p.name);
               nextX = fixPos(object.p.x, wOffset);
-              coord[nextX][nextY] = 1;
-              coord[fixPos(object.p.x, wOffset)][fixPos(object.p.y, hOffset)] = 0;
-              coord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y, hOffset)] = 0;
+              currCoord[nextX][nextY] = String(object.p.name);
+              currCoord[fixPos(object.p.x, wOffset)][fixPos(object.p.y, hOffset)] = "0";
+              currCoord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y, hOffset)] = "0";
               object.p.y -= 100 * scSize;
-              wait = 10;
+              wait = 40;
             }
           }
         } else {
           nextX = fixPos(object.p.x, wOffset);
           nextY = fixPos(object.p.y, -(100 + hOffset));
           if (checkFutureCollision(nextX, nextY)) {
-            coord[nextX][nextY] = 1;
-            coord[fixPos(object.p.x)][fixPos(object.p.y, hOffset)] = 0;
+            currCoord[nextX][nextY] = String(object.p.name);
+            currCoord[fixPos(object.p.x)][fixPos(object.p.y, hOffset)] = "0";
             object.p.y -= 100 * scSize;
-            wait = 10;
+            wait = 40;
           }
         }
         break;
@@ -345,23 +345,23 @@ window.addEventListener('load',function(e) {
           if (checkFutureCollision(nextX, nextY)) {
             nextX = fixPos(object.p.x, -wOffset);
             if (checkFutureCollision(nextX, nextY)) {
-              coord[nextX][nextY] = 1;
+              currCoord[nextX][nextY] = String(object.p.name);
               nextX = fixPos(object.p.x, wOffset);
-              coord[nextX][nextY] = 1;
-              coord[fixPos(object.p.x, wOffset)][fixPos(object.p.y, -hOffset)] = 0;
-              coord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y, -hOffset)] = 0;
+              currCoord[nextX][nextY] = String(object.p.name);
+              currCoord[fixPos(object.p.x, wOffset)][fixPos(object.p.y, -hOffset)] = "0";
+              currCoord[fixPos(object.p.x, -wOffset)][fixPos(object.p.y, -hOffset)] = "0";
               object.p.y += 100 * scSize;
-              wait = 10;
+              wait = 40;
             }
           }
         } else {
           nextX = fixPos(object.p.x, wOffset);
           nextY = fixPos(object.p.y, (100 + hOffset));
           if (checkFutureCollision(nextX, nextY)) {
-            coord[nextX][nextY] = 1;
-            coord[fixPos(object.p.x)][fixPos(object.p.y, -hOffset)] = 0;
+            currCoord[nextX][nextY] = String(object.p.name);
+            currCoord[fixPos(object.p.x)][fixPos(object.p.y, -hOffset)] = "0";
             object.p.y += 100 * scSize;
-            wait = 10;
+            wait = 40;
           }
         }
         break;
@@ -371,15 +371,16 @@ window.addEventListener('load',function(e) {
   }
 
   function checkFutureCollision(x, y) {
-    console.log(coord);
-    if (coord[x][y] == null) {
-      console.log("unidentified : [" + (x + 1) + "]["+ (y + 1) + "]");
+    //console.log(currCoord);
+    if (currCoord[x][y] == null) {
+      /* Print Coordinate */ 
+      //console.log("unidentified : [" + (x + 1) + "]["+ (y + 1) + "]");
       return false;
-    } else if (coord[x][y] == 1) {
-      console.log("filled : [" + (x + 1) + "]["+ (y + 1) + "]");
+    } else if (currCoord[x][y] != "0") {
+      //console.log("filled : [" + (x + 1) + "]["+ (y + 1) + "]");
       return false;
     } else {
-      console.log("empty : [" + (x + 1) + "]["+ (y + 1) + "]");
+      //console.log("empty : [" + (x + 1) + "]["+ (y + 1) + "]");
       return true;
     }
   }
@@ -391,7 +392,7 @@ window.addEventListener('load',function(e) {
   function resetMatrix4by5(matrix) {
     for (var i = 0; i < 4; i++)
         for (var j = 0; j < 5; j++)
-          matrix[i][j] = 0;
+          matrix[i][j] = "0";
     return;
   }
 
@@ -413,50 +414,149 @@ window.addEventListener('load',function(e) {
 
   /* if the board changes, increment move count by 1 */
   function moveCheck() {
-    if (!compareMatrix4by5(coord, prevCoord)) {
-      duplicateMatrix4by5(coord, prevCoord);
+    if (!compareMatrix4by5(currCoord, prevCoord)) {
+      duplicateMatrix4by5(prevCoord, tempCoord);
+      duplicateMatrix4by5(currCoord, prevCoord);
       moveCount++;
-      var contain = Q("UI.Text").first();
-      contain.p.label = "Moves: " + moveCount.toString();
+      var moveText = Q("UI.Text").first();
+      moveText.p.label = "Moves: " + moveCount.toString();
+      //undoFlag = true;
+      if (moveCount > 1) Q("UI.Container").at(0).p.hidden = false;
     }
     return;
   }
 
+  function undo() {
+    if (moveCount == 0) return;
+    if (Q("UI.Container").at(0).p.hidden == true) return;
+    duplicateMatrix4by5(tempCoord, currCoord);
+    duplicateMatrix4by5(tempCoord, prevCoord);
+
+    applyCoordinate(currCoord);
+
+    moveCount--;
+    var moveText = Q("UI.Text").first();
+    moveText.p.label = "Moves: " + moveCount.toString();
+    Q("UI.Container").at(0).p.hidden = true;
+  }
+
+  function applyCoordinate(matrix) {
+
+    /* Object Counters */
+    var ssCounter = 0;
+    var lsCounter = 0;
+    var hbCounter = 0;
+    var vbCounter = 0;
+
+    /* Scan Coord And Apply Position */
+    for (var i = 0; i < 4 ; i++)
+      for (var j = 0; j < 5; j++)
+      
+        switch (matrix[i][j]) {
+        case "ss":
+          Q("SS").at(ssCounter).p.x = coordToPos(i);
+          Q("SS").at(ssCounter).p.y = coordToPos(j);
+          ssCounter++;
+          break;
+        case "ls":
+          Q("LS").at(lsCounter).p.x = coordToPos(i + 0.5);
+          Q("LS").at(lsCounter).p.y = coordToPos(j + 0.5);
+          lsCounter++;
+          matrix[i][j + 1] = "lscounter";
+          matrix[i + 1][j] = "lscounter";
+          matrix[i + 1][j + 1] = "lscounter";
+          break;
+        case "lscounter":
+           matrix[i][j] = "ls";
+          break;
+        case "hb":
+          if (hbCounter < 1) {
+            Q("HB").at(hbCounter).p.x = coordToPos(i + 0.5);
+            Q("HB").at(hbCounter).p.y = coordToPos(j);
+            hbCounter++;
+          }
+          matrix[i + 1][j] = "hbcounter";
+          break;
+        case "hbcounter":
+           matrix[i][j] = "hb";
+          break;
+        case "vb":
+          if (vbCounter < 4) {
+            Q("VB").at(vbCounter).p.x = coordToPos(i);
+            Q("VB").at(vbCounter).p.y = coordToPos(j + 0.5);
+            vbCounter++;
+            matrix[i][j + 1] = "vbcounter";
+          }
+          break;
+        case "vbcounter":
+          matrix[i][j] = "vb";
+          break;
+        default:
+          matrix[i][j] = "0";
+          break;
+        }
+  }
+
+  function coordToPos(pos) {
+    return ((pos + 1) * (100 * scSize));
+  }
 
   /* Executed Commands */
 
   Q.scene("startGame",function(stage) {  
+    /* Start Testing */
+    //console.log(coordToPos(2));
+
+    /* End Testing */
+
     console.log("Begin");
 
     /* Refresh Coordinate to 0 */
-    resetMatrix4by5(coord);
+    resetMatrix4by5(currCoord);
     resetMatrix4by5(prevCoord);
 
     /* Refresh movement counter to 0 */
     moveCount = 0;
 
     console.log("Pre-Object Implementation");
-    console.log(coord);
+    console.log(currCoord);
 
     /* Implement Objects */
-    var bg1 = stage.insert(new Q.BG({ x: 250 * scSize, y: 300 * scSize, z: 3, scale: scSize}));
+    var bg1 = stage.insert(new Q.BG({ name: "bg", x: 250 * scSize, y: 300 * scSize, z: 3, scale: scSize}));
 
-    var ss1 = stage.insert(new Q.SS({ x: 100 * scSize, y: 500 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
-    var ss2 = stage.insert(new Q.SS({ x: 200 * scSize, y: 400 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
-    var ss3 = stage.insert(new Q.SS({ x: 300 * scSize, y: 400 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
-    var ss4 = stage.insert(new Q.SS({ x: 400 * scSize, y: 500 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var ss1 = stage.insert(new Q.SS({ name: "ss", x: 100 * scSize, y: 500 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var ss2 = stage.insert(new Q.SS({ name: "ss", x: 200 * scSize, y: 400 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var ss3 = stage.insert(new Q.SS({ name: "ss", x: 300 * scSize, y: 400 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var ss4 = stage.insert(new Q.SS({ name: "ss", x: 400 * scSize, y: 500 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
 
-    var ls1 = stage.insert(new Q.LS({ x: 250 * scSize, y: 150 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var ls1 = stage.insert(new Q.LS({ name: "ls", x: 250 * scSize, y: 150 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
 
-    var hb1 = stage.insert(new Q.HB({ x: 250 * scSize, y: 300 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var hb1 = stage.insert(new Q.HB({ name: "hb", x: 250 * scSize, y: 300 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
 
-    var vb1 = stage.insert(new Q.VB({ x: 100 * scSize, y: 150 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
-    var vb2 = stage.insert(new Q.VB({ x: 100 * scSize, y: 350 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
-    var vb3 = stage.insert(new Q.VB({ x: 400 * scSize, y: 150 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
-    var vb4 = stage.insert(new Q.VB({ x: 400 * scSize, y: 350 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var vb1 = stage.insert(new Q.VB({ name: "vb", x: 100 * scSize, y: 150 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var vb2 = stage.insert(new Q.VB({ name: "vb", x: 100 * scSize, y: 350 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var vb3 = stage.insert(new Q.VB({ name: "vb", x: 400 * scSize, y: 150 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var vb4 = stage.insert(new Q.VB({ name: "vb", x: 400 * scSize, y: 350 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
 
     /* Duplicate Matrix After Object Initialization */
-    duplicateMatrix4by5(coord, prevCoord);
+    duplicateMatrix4by5(currCoord, prevCoord);
+
+    /* Undo Box */
+    var undoBox = stage.insert(new Q.UI.Container({
+      fill: "gray",
+      border: 5,
+      y: 125,
+      x: Q.width/3,
+      hidden: true
+    }));
+    
+    /* Undo Button */
+    var undoButton = undoBox.insert(new Q.UI.Button({ 
+      label: " Undo  ", fontColor: "white", x: 0, y: 0, font: "800 24px Arial" }))
+    undoButton.on("click",function() {
+      undo();
+    });
+    undoBox.fit(20);
 
     /* Reset Box */
     var resetBox = stage.insert(new Q.UI.Container({
@@ -491,7 +591,7 @@ window.addEventListener('load',function(e) {
     moveCountBox.fit(20,20);
 
     console.log("Post-Object Implementation");
-    console.log(coord);
+    console.log(currCoord);
   });
 
   Q.scene('endGame',function(stage) {
