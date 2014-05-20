@@ -146,7 +146,7 @@ window.addEventListener('load',function(e) {
             goTo("right", this, 50, 50);
           }
         }
-      if (this.p.x == 250 * scSize && this.p.y == 350 * scSize) {
+      if (this.p.x == 250 * scSize && this.p.y == 450 * scSize) {
         Q.stageScene("endGame",1, { label: "Congratulation!"});
       }
     },
