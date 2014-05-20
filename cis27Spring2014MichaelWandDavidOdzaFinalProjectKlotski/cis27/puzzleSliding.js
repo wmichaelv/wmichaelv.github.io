@@ -527,14 +527,14 @@ window.addEventListener('load',function(e) {
     /* Implement Objects */
     var bg1 = stage.insert(new Q.BG({ name: "bg", x: 250 * scSize, y: 300 * scSize, z: 3, scale: scSize}));
 
-    //var ss1 = stage.insert(new Q.SS({ name: "ss", x: 100 * scSize, y: 500 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
-    //var ss2 = stage.insert(new Q.SS({ name: "ss", x: 200 * scSize, y: 400 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
-    //var ss3 = stage.insert(new Q.SS({ name: "ss", x: 300 * scSize, y: 400 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
-    //var ss4 = stage.insert(new Q.SS({ name: "ss", x: 400 * scSize, y: 500 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var ss1 = stage.insert(new Q.SS({ name: "ss", x: 100 * scSize, y: 500 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var ss2 = stage.insert(new Q.SS({ name: "ss", x: 200 * scSize, y: 400 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var ss3 = stage.insert(new Q.SS({ name: "ss", x: 300 * scSize, y: 400 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var ss4 = stage.insert(new Q.SS({ name: "ss", x: 400 * scSize, y: 500 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
 
     var ls1 = stage.insert(new Q.LS({ name: "ls", x: 250 * scSize, y: 150 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
 
-    //var hb1 = stage.insert(new Q.HB({ name: "hb", x: 250 * scSize, y: 300 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
+    var hb1 = stage.insert(new Q.HB({ name: "hb", x: 250 * scSize, y: 300 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
 
     var vb1 = stage.insert(new Q.VB({ name: "vb", x: 100 * scSize, y: 150 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
     var vb2 = stage.insert(new Q.VB({ name: "vb", x: 100 * scSize, y: 350 * scSize, z: 2, scale: scSize, type: Q.SPRITE_UI}));
