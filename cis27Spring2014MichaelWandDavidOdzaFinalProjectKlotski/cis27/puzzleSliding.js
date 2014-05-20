@@ -420,7 +420,10 @@ window.addEventListener('load',function(e) {
       moveCount++;
       var moveText = Q("UI.Text").first();
       moveText.p.label = "Moves: " + moveCount.toString();
-      //undoFlag = true;
+      
+      /* Show Reset Button After 1 Movement */
+      if (moveCount > 0) Q("UI.Container").at(1).p.hidden = false;
+      /* Show Undo Button After 2 Movement */
       if (moveCount > 1) Q("UI.Container").at(0).p.hidden = false;
     }
     return;
@@ -563,7 +566,8 @@ window.addEventListener('load',function(e) {
       fill: "gray",
       border: 5,
       y: 225,
-      x: Q.width/3
+      x: Q.width/3,
+      hidden: true
     }));
     
     /* Reset Button */
