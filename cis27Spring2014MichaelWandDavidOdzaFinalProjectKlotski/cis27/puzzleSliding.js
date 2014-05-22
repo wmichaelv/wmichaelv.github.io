@@ -1,7 +1,7 @@
 window.addEventListener('load',function(e) {
 
   /* Scale Size */
-  var scSize = .5;
+  var scSize = 1;
 
   /************************
    * Collision Coordinate *
@@ -549,7 +549,7 @@ window.addEventListener('load',function(e) {
       fill: "gray",
       border: 5,
       y: 125,
-      x: Q.width/3,
+      x: 2/3 * Q.width * scSize,
       hidden: true
     }));
     
@@ -566,7 +566,7 @@ window.addEventListener('load',function(e) {
       fill: "gray",
       border: 5,
       y: 225,
-      x: Q.width/3,
+      x: 2/3 * Q.width * scSize,
       hidden: true
     }));
     
@@ -584,7 +584,7 @@ window.addEventListener('load',function(e) {
       fill: "gray",
       border: 5,
       y: 325,
-      x: Q.width/3
+      x: 2/3 * Q.width * scSize
     }));
     stage.insert(new Q.UI.Text({ 
       label: "Moves: " + moveCount.toString(),
