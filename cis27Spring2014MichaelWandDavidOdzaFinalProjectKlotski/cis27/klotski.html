@@ -21,38 +21,8 @@
 </head>
 <body>
 <br>
-<div id="player"></div>
-<script>
-    //Load player api asynchronously.
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    var done = false;
-    var player;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-          height: '185',
-          width: '320',
-          videoId: 'wE5KFf5QotI',
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
-        });
-    }
-    function onPlayerReady(evt) {
-        evt.target.playVideo();
-    }
-    function onPlayerStateChange(evt) {
-        if (evt.data == YT.PlayerState.PLAYING && !done) {
-            setTimeout(stopVideo, 6000);
-            done = true;
-        }
-    }
-    function stopVideo() {
-        player.stopVideo();
-    }
-</script>
+<iframe width="420" height="345"
+src="http://www.youtube.com/embed/wE5KFf5QotI">
+</iframe>
 </body>
 </html>
