@@ -548,7 +548,7 @@ window.addEventListener('load',function(e) {
     var undoBox = stage.insert(new Q.UI.Container({
       fill: "gray",
       border: 5,
-      y: 125,
+      y: 250 * scSize,
       x: 2/3 * Q.width * scSize,
       hidden: true
     }));
@@ -565,7 +565,7 @@ window.addEventListener('load',function(e) {
     var resetBox = stage.insert(new Q.UI.Container({
       fill: "gray",
       border: 5,
-      y: 225,
+      y: 450 * scSize,
       x: 2/3 * Q.width * scSize,
       hidden: true
     }));
@@ -583,7 +583,7 @@ window.addEventListener('load',function(e) {
     var moveCountBox = stage.insert(new Q.UI.Container({
       fill: "gray",
       border: 5,
-      y: 325,
+      y: 650 * scSize,
       x: 2/3 * Q.width * scSize
     }));
     stage.insert(new Q.UI.Text({ 
