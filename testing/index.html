@@ -9,11 +9,20 @@ $.get("www.google.com", function(response) { alert(response) });
 <!-- 
 
 Get Name
+
 document.body.getElementsByClassName("infobox").item(0).tBodies.item(0).rows[0].getElementsByTagName('p')[0].innerHTML; 
+
+
 Get Species
-var table = document.body.getElementsByClassName("infobox").item(0).tBodies.item(0);
-for(var i = 0; i < table.size; i++)
-  if (table.rows[i].cells[0].getElementsByTagName('b')[0].innerHTML == "Species") console.log(table.rows[i]);
+
+var table = document.body.getElementsByClassName("infobox").item(0);
+for(var i = 0; i < table.tBodies.item(0).rows.length; i++) {
+  var bCode = table.tBodies.item(0).rows[i].cells[0].getElementsByTagName('b')[0];
+  if (bCode != null)
+    if (bCode.innerHTML == "Species") 
+      table.tBodies.item(0).rows[i].cells[1].getElementsByTagName('a')[0].innerHTML;
+}
+
 -->
 </body>
 </html>
