@@ -8,19 +8,64 @@ $.get("www.google.com", function(response) { alert(response) });
 </script>
 <!-- 
 
-Get Name
-
-document.body.getElementsByClassName("infobox").item(0).tBodies.item(0).rows[0].getElementsByTagName('p')[0].innerHTML; 
-
-
-Get Species
+// Get Table
 
 var table = document.body.getElementsByClassName("infobox").item(0);
+
+// Get Name
+
+table.tBodies.item(0).rows[0].getElementsByTagName('p')[0].innerHTML; 
+
+// Get A.K.A (Might Return Null)
+
 for(var i = 0; i < table.tBodies.item(0).rows.length; i++) {
   var bCode = table.tBodies.item(0).rows[i].cells[0].getElementsByTagName('b')[0];
   if (bCode != null)
-    if (bCode.innerHTML == "Species") 
-      table.tBodies.item(0).rows[i].cells[1].getElementsByTagName('a')[0].innerHTML;
+    if (bCode.innerText == "A.K.A") 
+      table.tBodies.item(0).rows[i].cells[1].innerText;
+}
+
+// Get Species
+
+for(var i = 0; i < table.tBodies.item(0).rows.length; i++) {
+  var bCode = table.tBodies.item(0).rows[i].cells[0].getElementsByTagName('b')[0];
+  if (bCode != null)
+    if (bCode.innerText == "Species") 
+      table.tBodies.item(0).rows[i].cells[1].innerText;
+}
+
+// Get Abilities
+
+for(var i = 0; i < table.tBodies.item(0).rows.length; i++) {
+  var bCode = table.tBodies.item(0).rows[i].cells[0].getElementsByTagName('b')[0];
+  if (bCode != null)
+    if (bCode.innerText == "Abilities") 
+      table.tBodies.item(0).rows[i].cells[1].innerText;
+}
+
+// Get Age
+for(var i = 0; i < table.tBodies.item(0).rows.length; i++) {
+  var bCode = table.tBodies.item(0).rows[i].cells[0].getElementsByTagName('b')[0];
+  if (bCode != null)
+    if (bCode.innerText == "Age") 
+      table.tBodies.item(0).rows[i].cells[1].innerText;
+}
+
+// Get Occupation
+for(var i = 0; i < table.tBodies.item(0).rows.length; i++) {
+  var bCode = table.tBodies.item(0).rows[i].cells[0].getElementsByTagName('b')[0];
+  if (bCode != null)
+    if (bCode.innerText == "Occupation") 
+      table.tBodies.item(0).rows[i].cells[1].innerText;
+}
+
+
+// Get Location
+for(var i = 0; i < table.tBodies.item(0).rows.length; i++) {
+  var bCode = table.tBodies.item(0).rows[i].cells[0].getElementsByTagName('b')[0];
+  if (bCode != null)
+    if (bCode.innerText == "Location") 
+      table.tBodies.item(0).rows[i].cells[1].innerText;
 }
 
 -->
