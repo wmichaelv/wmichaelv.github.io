@@ -3,30 +3,30 @@ var Operator = {
 		eval: function(a, b) {
 			return a || b;
 		},
-		precendence: 3
+		precedence: 3
 	},
 	"C": {
 		eval: function(a, b) {
 			return a && b;
 		},
-		precendence: 2
+		precedence: 2
 	},
 	"N": {
 		eval: function(a, b) {
 			return !b;
 		},
-		precendence: 1
+		precedence: 1
 	},
 	"K": {
 		eval: function(a, b) {
 			return !a || b;
 		},
-		precendence: 4
+		precedence: 4
 	},
 	"B": {
 		eval: function(a, b) {
 			return a === b;
 		},
-		precendence: 5
+		precedence: 5
 	}
 }
