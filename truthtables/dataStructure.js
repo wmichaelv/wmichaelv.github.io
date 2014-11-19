@@ -92,11 +92,8 @@ function NodeOperator (ntype) {
 	 *                     - ift  -> K
 	 *                     - ifif -> B
 	 */
-	this.front = true;
 	this.typeNode = ntype;
-	if (ntype != "N") {
-		this.front = false;
-	}
+	this.front = (ntype == "N");
 }
 function NodeVariable (index) {
 	this.indexNode = index;
