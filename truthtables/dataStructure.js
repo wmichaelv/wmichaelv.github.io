@@ -1,7 +1,7 @@
 function Tree (node) {
 	this.head = node;
 	this.push = function (node) {
-		node.rightNode = this.head;
+		node.leftNode = this.head;
 		this.head = node;
 	};
 	this.find = function (node, identifier) {
