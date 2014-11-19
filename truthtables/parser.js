@@ -29,12 +29,17 @@ function addOperator(val) {
 			myTree = new Tree(new TreeNode(val));
 			oNode = myTree.head;
 		} else {
-			if (Operator[val].precedence >= Operator[myTree.head.val].precedence) {
+			if (myTree.head.val in Operator) {
+				if (Operator[val].precedence >= Operator[myTree.head.val].precedence) {
+					myTree.push(new TreeNode(val));
+					oNode = myTree.head;
+				} else {
+					oNode = new TreeNode(val);
+					myTree.branch(head, oNode);
+				}
+			} else {
 				myTree.push(new TreeNode(val));
 				oNode = myTree.head;
-			} else {
-				oNode = new TreeNode(val);
-				myTree.branch(head, oNode);
 			}
 		}
 	}
