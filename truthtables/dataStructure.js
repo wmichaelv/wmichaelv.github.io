@@ -1,9 +1,14 @@
 function Stack () {
 	this.head = null;
+	this.vCount = 0;
+	this.length = 0;
 	this.peep = function () {
 		return this.head;
 	};
 	this.push = function (node) {
+		if (NodeVariable.prototype.isPrototypeOf(node)) {
+			vCount++;
+		}
 		if (this.head == null) {
 			this.head = node;
 		} else {
@@ -11,14 +16,29 @@ function Stack () {
 			this.head.prevNode = node;
 			this.head = node;
 		}
+		this.length++;
 	};
 	this.pushAt = function (node, location) {
-		if (location == 0) {
+		if (location > 0 && location < this.length) {
+			var prevHead = null;
+			var head = this.head;
+			for (var i = 1; i < location; i++) {
+				prevHead = head;
+				head = head.nextNode;
+			}
+			prevHead.nextNode = node;
+			node.prevNode = prevHead;
+			if (head != null) {
+				head.prevNode = node;
+				node.nextNode = head;
+			}
+			if (NodeVariable.prototype.isPrototypeOf(node)) {
+				vCount++;
+			}
+		} else if (location == 0) {
 			this.push(node);
-		} else if (location > 0) {
-			var head = this.head
 		}
-	}
+	};
 	this.pop = function () {
 		var returnValue = null;
 		if (this.head) {
@@ -58,14 +78,13 @@ function Node (ntype, nvalue) {
 	/*
 	 * node type: - operator
 	 *            - variable
-	 *            - group
 	 */
 	this.typeNode = ntype;
 	this.valNode = nvalue;
 	this.nextNode = null;
 	this.prevNode = null;
 }
-function NodeOperator(ntype) {
+function NodeOperator (ntype) {
 	/*
 	 * node operator type: - or   -> D
 	 *                     - and  -> C
@@ -73,8 +92,12 @@ function NodeOperator(ntype) {
 	 *                     - ift  -> K
 	 *                     - ifif -> B
 	 */
+	this.front = true;
 	this.typeNode = ntype;
+	if (ntype != "N") {
+		this.front = false;
+	}
 }
-function NodeVariable(index) {
+function NodeVariable (index) {
 	this.indexNode = index;
 }
