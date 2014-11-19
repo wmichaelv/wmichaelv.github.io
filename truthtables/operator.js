@@ -13,7 +13,7 @@ var Operator = {
 	},
 	"N": {
 		eval: function(a, b) {
-			return !a;
+			return !b;
 		},
 		precendence: 1
 	},
