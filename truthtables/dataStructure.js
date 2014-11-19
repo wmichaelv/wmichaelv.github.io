@@ -4,9 +4,9 @@ function Tree (node) {
 		node.leftNode = this.head;
 		this.head = node;
 	};
-	this.branch = function (node) {
-		node.rightNode = this.head.rightNode;
-		this.head.rightNode = node;
+	this.branch = function (head, node) {
+		node.leftNode = head.rightNode;
+		head.rightNode = node;
 	};
 	this.find = function (node, identifier) {
 		if (node.identifier == identifier) {
