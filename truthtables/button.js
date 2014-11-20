@@ -30,8 +30,10 @@ $('<span id = "blink" class="blank">|</span>').appendTo("#text-display");
 setInterval ('blinkAnimation()', 600);
 /* Blink Blink [End] */
 
-$("#group").click(function () {
+$("#group-left").click(function () {
 	$("#blink").before('<span class="' + getPairNumber() + '">(</span>');
+});
+$("#group-right").click(function () {
 	$("#blink").before('<span class="' + getPairNumber() + '">)</span>');
 });
 $("#left").click(function () {
