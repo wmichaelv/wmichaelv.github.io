@@ -1,10 +1,14 @@
 /* Adjust Button CSS [Begin] */
-$(window).bind('resize', function() {
+function resizeButtonFontSize() {
 	var w = parseInt($("#truth-table #row-buttonA input, #truth-table #row-buttonB input").css('width'));
 	var h = parseInt($("#truth-table #row-buttonA input, #truth-table #row-buttonB input").css('height'));
 
 	$("#truth-table #row-buttonA input, #truth-table #row-buttonB input").css("font-size", (Math.min(w, h) * 0.7).toString() + "px");
+}
+$(window).bind('resize', function() {
+	resizeButtonFontSize();
 });
+resizeButtonFontSize();
 /* Adjust Button CSS [End] */
 
 /* Blink Blink [Begin] */
