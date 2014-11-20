@@ -7,7 +7,7 @@ function resizeButtonFontSize() {
 }
 function resizeSpanFontSize() {
 	var h = parseInt($("#truth-table #row-display #text-display").css('height'));
-	$("#truth-table #row-display #text-display").css('font-size', (h* 0.5).toString() + "px");
+	$("#truth-table #row-display #text-display").css('font-size', (h* 0.25).toString() + "px");
 }
 $(window).bind('resize', function() {
 	resizeButtonFontSize();
