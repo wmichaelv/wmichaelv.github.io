@@ -1,15 +1,21 @@
-/* Adjust Button CSS [Begin] */
+/* Adjust Font Size [Begin] */
 function resizeButtonFontSize() {
 	var w = parseInt($("#truth-table #row-buttonA input, #truth-table #row-buttonB input").css('width'));
 	var h = parseInt($("#truth-table #row-buttonA input, #truth-table #row-buttonB input").css('height'));
 
 	$("#truth-table #row-buttonA input, #truth-table #row-buttonB input").css("font-size", (Math.min(w, h) * 0.7).toString() + "px");
 }
+function resizeSpanFontSize() {
+	var h = parseInt($("#truth-table #row-display #text-display").css('height'));
+	$("#truth-table #row-display #text-display").css('font-size', (h* 0.5).toString() + "px");
+}
 $(window).bind('resize', function() {
 	resizeButtonFontSize();
+	resizeSpanFontSize();
 });
 resizeButtonFontSize();
-/* Adjust Button CSS [End] */
+resizeSpanFontSize();
+/* Adjust Font Size [End] */
 
 /* Blink Blink [Begin] */
 function startBlink() {
