@@ -18,19 +18,16 @@ resizeSpanFontSize();
 /* Adjust Font Size [End] */
 
 /* Blink Blink [Begin] */
-function startBlink() {
-	$("#blink").css('color','white');
-	$("#blink").css('background','black');
-	setTimeout(stopBlink,500)
-}
-function stopBlink() {
-	$("#blink").css('color','black');
-	$("#blink").css('background','white');
-	setTimeout(startBlink,500)
+function blinkAnimation() {
+    $("#blink").animate({
+        opacity: 0
+    }, 'fast', 'swing').animate({
+        opacity: 1
+    }, 'fast', 'swing');
 }
 
-$('<span id = "blink" class="blank">_</span>').appendTo("#text-display");
-startBlink();
+$('<span id = "blink" class="blank">|</span>').appendTo("#text-display");
+setInterval ('blinkAnimation()', 600);
 /* Blink Blink [End] */
 
 $("#group").click(function () {
@@ -41,10 +38,7 @@ $("#left").click(function () {
 	var spans = $("#text-display span");
 	for (var i = 0; i < spans.length; i++) {
 		if (spans[i].id == "blink" && i != 0) {
-			spans[i-1].id = "blink";
-			spans[i].id = "";
-			spans[i].style["color"] = "black";
-			spans[i].style["background"] = "white";
+			$("#text-display span")[i-1].before(spans[i]);
 			return;
 		}
 	}
@@ -53,10 +47,7 @@ $("#right").click(function () {
 	var spans = $("#text-display span");
 	for (var i = 0; i < spans.length; i++) {
 		if (spans[i].id == "blink" && i != (spans.length - 1)) {
-			spans[i+1].id = "blink";
-			spans[i].id = "";
-			spans[i].style["color"] = "black";
-			spans[i].style["background"] = "white";
+			$("#text-display span")[i+1].after(spans[i]);
 			return;
 		}
 	}
