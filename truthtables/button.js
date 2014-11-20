@@ -1,3 +1,12 @@
+/* Adjust Button CSS [Begin] */
+$(window).bind('resize', function() {
+	var w = parseInt($("#truth-table #row-buttonA input, #truth-table #row-buttonB input").css('width'));
+	var h = parseInt($("#truth-table #row-buttonA input, #truth-table #row-buttonB input").css('height'));
+
+	$("#truth-table #row-buttonA input, #truth-table #row-buttonB input").css("font-size", (Math.min(w, h) * 0.7).toString() + "px");
+});
+/* Adjust Button CSS [End] */
+
 /* Blink Blink [Begin] */
 function startBlink() {
 	$("#blink").css('color','white');
@@ -12,7 +21,6 @@ function stopBlink() {
 
 $('<span id = "blink" class="blank">_</span>').appendTo("#text-display");
 startBlink();
-
 /* Blink Blink [End] */
 
 $("#group").click(function () {
