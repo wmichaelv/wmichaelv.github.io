@@ -35,19 +35,20 @@ $("#group").click(function () {
 	$("#blink").before('<span class="' + getPairNumber() + '">)</span>');
 });
 $("#left").click(function () {
-	var spans = $("#text-display span");
-	for (var i = 0; i < spans.length; i++) {
-		if (spans[i].id == "blink" && i != 0) {
-			$("#text-display span")[i-1].before(spans[i]);
+	if ($("#text-display span")[0].id == "blink") {
+		return;
+	}
+	for (var spans = $("#text-display span"); spans.length != 0; spans = spans.nextAll()) {
+		if (spans[1].id == "blink") {
+			spans.first().before(spans.next().remove());
 			return;
 		}
 	}
 });
 $("#right").click(function () {
-	var spans = $("#text-display span");
-	for (var i = 0; i < spans.length; i++) {
-		if (spans[i].id == "blink" && i != (spans.length - 1)) {
-			$("#text-display span")[i+1].after(spans[i]);
+	for (var spans = $("#text-display span"); spans.length != 0; spans = spans.nextAll()) {
+		if (spans[0].id == "blink") {
+			spans.next().after(spans.first().remove());
 			return;
 		}
 	}
