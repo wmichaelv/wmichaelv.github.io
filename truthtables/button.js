@@ -31,10 +31,10 @@ setInterval ('blinkAnimation()', 600);
 /* Blink Blink [End] */
 
 $("#group-left").click(function () {
-	$("#blink").before('<span class="' + getPairNumber() + '">(</span>');
+	$("#blink").before('<span class="' + getBarCode() + '">(</span>');
 });
 $("#group-right").click(function () {
-	$("#blink").before('<span class="' + getPairNumber() + '">)</span>');
+	$("#blink").before('<span class="' + getBarCode() + '">)</span>');
 });
 $("#left").click(function () {
 	if ($("#text-display span")[0].id == "blink") {
@@ -62,11 +62,11 @@ $("#right").click(function () {
 	}
 });
 
-function getPairNumber() {
+function getBarCode() {
 	if (this.number == null) {
-		this.number = 0;
+		this.number = 10231241231;
 	} else {
-		this.number += 0.5;
+		this.number += 1;
 	}
 	return Math.floor(this.number).toString();
 }
