@@ -40,7 +40,7 @@ $("#left").click(function () {
 	}
 	for (var spans = $("#text-display span"); spans.length != 0; spans = spans.nextAll()) {
 		if (spans[1].id == "blink") {
-			spans.first().before(spans.next().remove());
+			spans.first().before(spans.next().first().remove());
 			return;
 		}
 	}
@@ -48,7 +48,7 @@ $("#left").click(function () {
 $("#right").click(function () {
 	for (var spans = $("#text-display span"); spans.length != 0; spans = spans.nextAll()) {
 		if (spans[0].id == "blink") {
-			spans.next().after(spans.first().remove());
+			spans.next().first().after(spans.first().remove());
 			return;
 		}
 	}
