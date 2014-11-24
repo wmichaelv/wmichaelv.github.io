@@ -7,7 +7,6 @@ html, body {
 
 span {
   white-space:nowrap;
-  display: block;
 }
 
 #truth-table {
