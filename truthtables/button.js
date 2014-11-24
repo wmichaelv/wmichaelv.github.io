@@ -31,6 +31,15 @@ setInterval ('blinkAnimation()', 600);
 /* Blink Blink [End] */
 
 /* Row-ButtonA [Begin] */
+$("#p").click(function () {
+	$("#blink").before('<span class="pVar">p' + getVariableCode() + '</span>');
+
+	/* Refresh the number */
+	var pVar = $(".pVar");
+	for (var i = 0; i < pVar.length; i++) {
+		pVar[i].innerHTML = "p" + i.toString();
+	}
+});
 $("#left").click(function () {
 	if ($("#text-display span")[0].id == "blink") {
 		return;
@@ -83,10 +92,26 @@ $("#group-right").click(function () {
 /* Row-ButtonB [End] */
 
 function getBarCode() {
-	if (this.number == null) {
-		this.number = 10231241231;
+	if (getBarCode.number == null) {
+		getBarCode.number = 10231241231;
 	} else {
-		this.number += 1;
+		getBarCode.number += 1;
 	}
-	return Math.floor(this.number).toString();
+	return getBarCode.number.toString();
+}
+function getVariableCode() {
+	if (getVariableCode.number == null) {
+		getVariableCode.number = 0;
+	} else {
+		getVariableCode.number += 1;
+	}
+	return getVariableCode.number.toString();
+}
+function reduceVariableCode(n) {
+	/* Refresh the number */
+	var pVar = $(".pVar");
+	for (var i = n + 1; i < pVar.length; i++) {
+		pVar[i].innerHTML = "p" + i.toString();
+	}
+	getVariableCode.number -= 1;
 }
