@@ -5,6 +5,10 @@ html, body {
   margin: auto;
 }
 
+span {
+  display: block;
+}
+
 #truth-table {
   position: relative;
   height: 100%;
