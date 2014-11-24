@@ -65,6 +65,24 @@ $("#right").click(function () {
 		}
 	}
 });
+$("#del").click(function () {
+	if ($("#text-display span")[0].id == "blink") {
+		return;
+	}
+
+	for (var spans = $("#text-display span"); spans.length != 0; spans = spans.nextAll()) {
+		if (spans.length < 2) {
+			return;
+		}
+		if (spans[1].id == "blink") {
+			if (spans[0].className == "pVar") {
+				reduceVariableCode(spans[0].innerHTML.substr(1));
+			}
+			spans.first().remove();
+			return;
+		}
+	}
+});
 /* Row-ButtonA [End] */
 
 /* Row-ButtonB [Begin] */
@@ -110,8 +128,8 @@ function getVariableCode() {
 function reduceVariableCode(n) {
 	/* Refresh the number */
 	var pVar = $(".pVar");
-	for (var i = n + 1; i < pVar.length; i++) {
-		pVar[i].innerHTML = "p" + i.toString();
+	for (var i = n; i < pVar.length; i++) {
+		pVar[i].innerHTML = "p" + (i-1).toString();
 	}
 	getVariableCode.number -= 1;
 }
