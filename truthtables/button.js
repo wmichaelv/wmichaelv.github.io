@@ -30,12 +30,7 @@ $('<span id = "blink" class="blank">|</span>').appendTo("#text-display");
 setInterval ('blinkAnimation()', 600);
 /* Blink Blink [End] */
 
-$("#group-left").click(function () {
-	$("#blink").before('<span class="' + getBarCode() + '">(</span>');
-});
-$("#group-right").click(function () {
-	$("#blink").before('<span class="' + getBarCode() + '">)</span>');
-});
+/* Row-ButtonA [Begin] */
 $("#left").click(function () {
 	if ($("#text-display span")[0].id == "blink") {
 		return;
@@ -61,6 +56,31 @@ $("#right").click(function () {
 		}
 	}
 });
+/* Row-ButtonA [End] */
+
+/* Row-ButtonB [Begin] */
+$("#and").click(function () {
+	$("#blink").before('<span class="' + getBarCode() + '">C</span>');
+});
+$("#or").click(function () {
+	$("#blink").before('<span class="' + getBarCode() + '">D</span>');
+});
+$("#neg").click(function () {
+	$("#blink").before('<span class="' + getBarCode() + '">N</span>');
+});
+$("#ift").click(function () {
+	$("#blink").before('<span class="' + getBarCode() + '">K</span>');
+});
+$("#ifif").click(function () {
+	$("#blink").before('<span class="' + getBarCode() + '">B</span>');
+});
+$("#group-left").click(function () {
+	$("#blink").before('<span class="' + getBarCode() + '">(</span>');
+});
+$("#group-right").click(function () {
+	$("#blink").before('<span class="' + getBarCode() + '">)</span>');
+});
+/* Row-ButtonB [End] */
 
 function getBarCode() {
 	if (this.number == null) {
