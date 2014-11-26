@@ -5,7 +5,7 @@ function Tree (node) {
 		this.head = node;
 	};
 	this.branch = function (head, node) {
-		node.rightNode = head.rightNode;
+		node.leftNode = head.rightNode;
 		head.rightNode = node;
 	};
 	this.find = function (node, identifier) {
