@@ -21,9 +21,11 @@ function parse (text) {
 }
 function addOperator(val) {
 	if (gNode.length > 0) {
-		addOperatorByPrecedence(gNode[-1], val);
-	} else if (oFlag) {
-		addOperatorByPrecedence(oNode, val);
+		if (oFlag) {
+			addOperatorByPrecedence(oNode, val);
+		} else {
+			addOperatorByPrecedence(gNode[-1], val);
+		}
 	} else {
 		if (myTree == null) {
 			myTree = new Tree(new TreeNode(val));
@@ -46,14 +48,9 @@ function addOperator(val) {
 	oFlag = true;
 }
 function addOperatorByPrecedence(head, val) {
-	if (oNode) {
-		if (Operator[val].precedence >= Operator[oNode.val].precedence) {
-			myTree.branch(oNode, new TreeNode(val));
-			oNode = oNode.rightNode;
-		} else {
-			oNode = new TreeNode(val);
-			myTree.branch(head, oNode);
-		}
+	if (Operator[val].precedence >= Operator[oNode.val].precedence) {
+		myTree.branch(oNode, new TreeNode(val));
+		oNode = oNode.rightNode;
 	} else {
 		oNode = new TreeNode(val);
 		myTree.branch(head, oNode);
