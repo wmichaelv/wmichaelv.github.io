@@ -83,6 +83,27 @@ $("#del").click(function () {
 		}
 	}
 });
+$("#cal").click(function () {
+	/* Lazy try ... catch */
+	try {
+		parse($("#text-display").text().replace(/[|]/g, ""));
+	} catch (e) {
+		console.log("String Parsing Error :/");
+	}
+	/* Lazy try ... catch */
+	try {
+		generateTableValue(vCount);	
+	} catch (e) {
+		console.log("table value overflow? :/");
+	}
+	/* Lazy try ... catch */
+	try {
+		/* parse data structure */
+	} catch (e) {
+		console.log("Structure Parsing Error :/");
+	}
+	/* Display Result */
+});
 /* Row-ButtonA [End] */
 
 /* Row-ButtonB [Begin] */
