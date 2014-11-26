@@ -31,13 +31,15 @@ function addOperator(val) {
 			myTree = new Tree(new TreeNode(val));
 			oNode = myTree.head;
 		} else {
-			if (myTree.head.val in Operator) {
-				if (Operator[val].precedence >= Operator[myTree.head.val].precedence) {
+			if (oNode) {
+				if (oFlag) {
+					addOperatorByPrecedence(oNode, val);	
+				} else if (Operator[val].precedence >= Operator[myTree.head.val].precedence) {
 					myTree.push(new TreeNode(val));
 					oNode = myTree.head;
 				} else {
-					oNode = new TreeNode(val);
-					myTree.branch(myTree.head, oNode);
+					myTree.branch(oNode, new TreeNode(val));
+					oNode = oNode.rightNode;
 				}
 			} else {
 				myTree.push(new TreeNode(val));
