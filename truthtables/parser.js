@@ -37,7 +37,7 @@ function addOperator(val) {
 					oNode = myTree.head;
 				} else {
 					oNode = new TreeNode(val);
-					myTree.branch(head, oNode);
+					myTree.branch(myTree.head, oNode);
 				}
 			} else {
 				myTree.push(new TreeNode(val));
