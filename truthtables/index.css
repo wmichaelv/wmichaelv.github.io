@@ -36,11 +36,12 @@ span {
 }
 
 #truth-table #row-display #text-display {
-	position: relative;
+  position: relative;
   width: 100%;
   height: 100%;
   border: 1px solid;
   border-radius: 5px;
+  overflow:auto;
 }
 
 #truth-table #row-buttonA input,
