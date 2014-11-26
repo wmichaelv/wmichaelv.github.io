@@ -46,9 +46,14 @@ function addOperator(val) {
 	oFlag = true;
 }
 function addOperatorByPrecedence(head, val) {
-	if (Operator[val].precedence >= Operator[oNode.val].precedence) {
-		myTree.branch(oNode, new TreeNode(val));
-		oNode = oNode.rightNode;
+	if (oNode) {
+		if (Operator[val].precedence >= Operator[oNode.val].precedence) {
+			myTree.branch(oNode, new TreeNode(val));
+			oNode = oNode.rightNode;
+		} else {
+			oNode = new TreeNode(val);
+			myTree.branch(head, oNode);
+		}
 	} else {
 		oNode = new TreeNode(val);
 		myTree.branch(head, oNode);
