@@ -1,10 +1,12 @@
 var myTree = null;
 var oNode = null;
-var gNode = [];
-var vCount = 0;
-var oFlag = false;
+var gNode = [];    // Track node location
+var vCount = 0;    // Track number of variables
+var pCount = 0;    // Track number of paratheses
+var oFlag = false; // Operator
 function parse (text) {
 	/* For there shall be no error */
+	/* Under Construction
 	for (var i = 0; i < text.length; i++) {
 		if (text[i] in Operator) {
 			addOperator(text[i]);
@@ -13,11 +15,29 @@ function parse (text) {
 			while (!isNaN(text[i++]));
 			i--;
 		} else if (text[i] == "(") {
+			pCount++;
+			for (var j = i + 1; j < text.length; j++) {
+				if (text[j] == "(") {
+					pCount++;      // Increment counter
+				} else if (text[j] == ")") {
+					pCount--;      // Decrement counter
+				}
+				if (pCount == 0) { // Found the closing paratheis
+					if (j == text.length - 1) {
+						break;
+					}
+					if (myTree == null) {
+						addOperator(text[j+1]);
+						break;
+					}
+				}
+			}
 			gNode.push(oNode);
 		} else if (text[i] == ")") {
 			gNode.pop();
 		}
 	}
+	*/
 }
 function addOperator(val) {
 	if (gNode.length > 0) {
