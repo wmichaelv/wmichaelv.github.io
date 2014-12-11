@@ -1,8 +1,9 @@
 html, body {
   position: relative;
   height: 98%;
-  width: 320px;
-  max-width:320px;
+  width: 90%;
+  min-width:90%;
+  max-width:90%;
   margin: auto;
 }
 
